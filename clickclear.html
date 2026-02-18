@@ -1,616 +1,265 @@
-# Create a new directory for your project
-mkdir clickandclear
-cd clickandclear
-
-# Initialize git repository
-git init
-
-# Create the index.html file
-cat > index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click and Clear - Chrome Extension Policy Documentation</title>
+    <title>Click and Clear - Privacy Policy</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #333;
             background: #f5f5f5;
         }
-
+        
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
+            padding: 40px 20px;
             background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
+        
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
             text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
         }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        nav {
-            background: #2d3748;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
+        
+        h1 {
             color: #667eea;
+            font-size: 32px;
+            margin-bottom: 10px;
         }
-
-        main {
-            padding: 2rem;
+        
+        .last-updated {
+            color: #666;
+            font-size: 14px;
         }
-
-        section {
-            margin-bottom: 3rem;
-            scroll-margin-top: 60px;
-        }
-
+        
         h2 {
             color: #667eea;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #667eea;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
         }
-
+        
         h3 {
             color: #764ba2;
-            font-size: 1.4rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
-
-        h4 {
-            color: #2d3748;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
+        
         p {
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
+            text-align: justify;
         }
-
+        
         ul, ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
+            margin-left: 30px;
+            margin-bottom: 15px;
         }
-
+        
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
         }
-
-        .highlight-box {
-            background: #f7fafc;
+        
+        .highlight {
+            background: #f0f4ff;
+            padding: 20px;
             border-left: 4px solid #667eea;
-            padding: 1rem;
-            margin: 1rem 0;
+            margin: 20px 0;
+            border-radius: 4px;
         }
-
-        .checklist {
+        
+        .checkbox-list {
             list-style: none;
             margin-left: 0;
         }
-
-        .checklist li::before {
-            content: "✅ ";
-            margin-right: 0.5rem;
+        
+        .checkbox-list li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
         }
-
-        code {
-            background: #2d3748;
-            color: #fff;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
+        
+        .cross-list li:before {
+            content: "✗ ";
+            color: #ef4444;
+            font-weight: bold;
+            margin-right: 10px;
         }
-
-        pre {
-            background: #2d3748;
-            color: #fff;
-            padding: 1rem;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-        }
-
-        .permission-card {
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .badge {
-            display: inline-block;
-            background: #48bb78;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .badge.warning {
-            background: #ed8936;
-        }
-
+        
         footer {
-            background: #2d3748;
-            color: white;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            main {
-                padding: 1rem;
-            }
+            color: #666;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Click and Clear</h1>
-            <p>Chrome Extension Policy Documentation</p>
+            <h1>🗑️ Click and Clear</h1>
+            <h2 style="border: none; padding: 0; margin: 10px 0; color: #666; font-size: 16px;">Privacy Policy</h2>
+            <p class="last-updated">Last Updated: February 18, 2026</p>
         </header>
 
-        <nav>
-            <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#single-purpose">Single Purpose</a></li>
-                <li><a href="#jurisdiction">Jurisdiction</a></li>
-                <li><a href="#storage">Storage</a></li>
-                <li><a href="#host-permissions">Permissions</a></li>
-                <li><a href="#compliance">Compliance</a></li>
-                <li><a href="#capabilities">Capabilities</a></li>
-                <li><a href="#manifest">Manifest</a></li>
-            </ul>
-        </nav>
+        <h2>1. Overview</h2>
+        <p><strong>Click and Clear</strong> is a Chrome extension designed to help users delete their browsing data with a single click or keyboard shortcut. We are committed to protecting your privacy and being transparent about our practices.</p>
 
-        <main>
-            <section id="overview">
-                <h2>Extension Overview</h2>
-                <p><strong>Click and Clear</strong> is a Chrome extension designed for efficiently deleting browsing data with a single click or keyboard shortcut.</p>
-            </section>
+        <div class="highlight">
+            <strong>Key Statement:</strong> Click and Clear does NOT collect, track, or store any of your personal information, browsing history, or user activity. All operations are performed locally on your device.
+        </div>
 
-            <section id="single-purpose">
-                <h2>1. Single Purpose Description</h2>
-                
-                <div class="highlight-box">
-                    <h3>Purpose</h3>
-                    <p>One-click deletion of browsing data including history, cookies, cached files, downloads, and form data.</p>
-                </div>
+        <h2>2. What Data We Collect</h2>
+        <h3>Data We Collect:</h3>
+        <ul class="checkbox-list">
+            <li>User preferences for deletion settings (which data types to delete)</li>
+            <li>User's preferred time range for data deletion</li>
+        </ul>
 
-                <p>This extension allows users to quickly clear their browsing data through:</p>
-                <ul>
-                    <li>Direct click on the extension icon</li>
-                    <li>Keyboard shortcut (<code>Ctrl+Shift+D</code> on Windows/Linux, <code>Cmd+Shift+D</code> on Mac)</li>
-                </ul>
+        <h3>Data We DO NOT Collect:</h3>
+        <ul class="cross-list">
+            <li>Personal information (name, email, address, phone number)</li>
+            <li>Your browsing history or visited websites</li>
+            <li>Cookies or tracking data</li>
+            <li>Financial or payment information</li>
+            <li>Location information or IP addresses</li>
+            <li>Health or medical information</li>
+            <li>Passwords or authentication credentials</li>
+            <li>Keyboard input or mouse movements</li>
+            <li>Website content or files</li>
+            <li>Any analytics or usage data</li>
+        </ul>
 
-                <p>The extension provides granular control over which data types to delete and supports multiple time ranges (all time, last hour, day, week, or month).</p>
-            </section>
+        <h2>3. How We Use Your Data</h2>
+        <p>The limited data we store (your preferences) is used only to:</p>
+        <ul>
+            <li>Remember your deletion preferences between sessions</li>
+            <li>Remember your preferred time range selection</li>
+            <li>Enable a consistent user experience</li>
+        </ul>
 
-            <section id="jurisdiction">
-                <h2>2. Alignment with Jurisdiction</h2>
-                
-                <p>This extension complies with:</p>
-                
-                <h3>Chrome Web Store Policies</h3>
-                <ul>
-                    <li>Single-purpose, user-friendly design</li>
-                    <li>No deceptive practices</li>
-                    <li>Clear functionality description</li>
-                </ul>
+        <p><strong>We never:</strong></p>
+        <ul class="cross-list">
+            <li>Share your preferences with third parties</li>
+            <li>Transmit data to external servers</li>
+            <li>Use your data for analytics or marketing</li>
+            <li>Combine your data with other services</li>
+            <li>Sell or monetize your information</li>
+        </ul>
 
-                <h3>Privacy Laws</h3>
-                <ul>
-                    <li>Does not collect personal data</li>
-                    <li>Does not track user behavior</li>
-                    <li>All operations occur locally on the user's device</li>
-                </ul>
+        <h2>4. Where Data Is Stored</h2>
+        <h3>Local Storage Only</h3>
+        <p>All data is stored exclusively in <code>chrome.storage.local</code>, which means:</p>
+        <ul>
+            <li>Your preferences are stored only on your device</li>
+            <li>Data is not synced to Chrome cloud or any server</li>
+            <li>Data remains private and under your complete control</li>
+            <li>Uninstalling the extension deletes all stored data</li>
+        </ul>
 
-                <h3>Data Protection</h3>
-                <ul>
-                    <li>GDPR compliant (operates locally, no data transmission)</li>
-                    <li>No external storage or cloud synchronization</li>
-                </ul>
-            </section>
+        <h2>5. Permissions Explained</h2>
+        <h3>browsingData Permission</h3>
+        <p>This permission allows the extension to delete browsing data when you request it. We:</p>
+        <ul class="checkbox-list">
+            <li>Only delete data when you explicitly click the delete button or use the keyboard shortcut</li>
+            <li>Do not read or access your browsing data</li>
+            <li>Do not transmit any data externally</li>
+        </ul>
 
-            <section id="storage">
-                <h2>3. Storage Permission</h2>
+        <h3>commands Permission</h3>
+        <p>This permission enables keyboard shortcuts (Ctrl+Shift+D on Windows/Linux, Cmd+Shift+D on Mac). We:</p>
+        <ul class="checkbox-list">
+            <li>Only register system-level keyboard events</li>
+            <li>Do not monitor keyboard input for any other purpose</li>
+            <li>Do not track keystroke patterns</li>
+        </ul>
 
-                <h3>Permission Declaration</h3>
-                <pre><code>"permissions": ["storage"]</code></pre>
+        <h3>tabs Permission</h3>
+        <p>This permission allows closing open browser tabs when you select that option. We:</p>
+        <ul class="checkbox-list">
+            <li>Only close tabs when you explicitly enable and request this feature</li>
+            <li>Do not read tab content or history</li>
+            <li>Do not monitor tab activity</li>
+        </ul>
 
-                <h3>Usage</h3>
-                <ul>
-                    <li><strong>Local Storage:</strong> <code>chrome.storage.local</code></li>
-                    <li><strong>Purpose:</strong> Store user preferences for deletion settings</li>
-                </ul>
+        <h3>storage Permission</h3>
+        <p>This permission allows storing your preferences. We:</p>
+        <ul class="checkbox-list">
+            <li>Store only your deletion preferences and time range</li>
+            <li>Use only local storage (not cloud sync)</li>
+            <li>Never transmit stored data externally</li>
+        </ul>
 
-                <h3>Data Stored</h3>
-                <ul>
-                    <li>Selected data types to delete (openTabs, history, cookies, downloads, formData, cache)</li>
-                    <li>User's preferred time range selection</li>
-                </ul>
+        <h2>6. User Control</h2>
+        <p>You have complete control over the extension:</p>
+        <ul>
+            <li><strong>Choose what to delete:</strong> Select checkboxes for each data type</li>
+            <li><strong>Choose when to delete:</strong> Manually trigger deletion or use keyboard shortcuts</li>
+            <li><strong>Clear preferences:</strong> Remove all stored data through Chrome settings</li>
+            <li><strong>Uninstall anytime:</strong> All data is deleted when you remove the extension</li>
+        </ul>
 
-                <div class="highlight-box">
-                    <h4>Data Handling</h4>
-                    <ul class="checklist">
-                        <li>User preferences are saved locally only</li>
-                        <li>No data is sent to external servers</li>
-                        <li>Users can clear extension data anytime through Chrome settings</li>
-                    </ul>
-                </div>
-            </section>
+        <h2>7. Third-Party Services</h2>
+        <p>Click and Clear does not use any third-party services, analytics providers, or external APIs. The extension operates entirely within your browser with no external connections.</p>
 
-            <section id="host-permissions">
-                <h2>4. Host Permissions</h2>
+        <h2>8. Data Deletion Capabilities</h2>
+        <p>When you use Click and Clear, you can delete:</p>
+        <ul>
+            <li>Browsing history</li>
+            <li>Cookies and site data</li>
+            <li>Cached images and files</li>
+            <li>Download history</li>
+            <li>Autofill form data</li>
+            <li>Passwords (if selected)</li>
+            <li>Open tabs and windows (if selected)</li>
+            <li>Service workers</li>
+            <li>IndexedDB and Web SQL data</li>
+        </ul>
 
-                <h3>Permission Declaration</h3>
-                <pre><code>"permissions": ["browsingData", "commands", "storage", "tabs"]</code></pre>
+        <h2>9. Security</h2>
+        <p>Your data security is important to us:</p>
+        <ul class="checkbox-list">
+            <li>No external server connections</li>
+            <li>No data transmission over the internet</li>
+            <li>All operations are local to your device</li>
+            <li>Uses Chrome's native deletion APIs</li>
+            <li>No intermediate data storage</li>
+        </ul>
 
-                <div class="permission-card">
-                    <h3>a) <code>browsingData</code> Permission <span class="badge">CORE</span></h3>
-                    
-                    <h4>Purpose</h4>
-                    <p>Access Chrome's browsing data deletion API</p>
+        <h2>10. Children's Privacy</h2>
+        <p>Click and Clear does not knowingly collect information from children under 13. The extension does not target children and contains no age-restricted content. Parents concerned about their child's use should monitor their Chrome extension installations.</p>
 
-                    <h4>Justification</h4>
-                    <ul>
-                        <li><strong>Core Functionality:</strong> The primary feature of the extension is to delete browsing data. This permission is essential and cannot be replaced.</li>
-                        <li><strong>User Request Only:</strong> Data is only deleted when the user explicitly clicks the delete button or uses the keyboard shortcut.</li>
-                        <li><strong>No Unauthorized Access:</strong> The extension does not read or transmit browsing data; it only triggers deletion.</li>
-                        <li><strong>Compliance:</strong> This permission is required by Chrome Web Store policy for data deletion features.</li>
-                    </ul>
+        <h2>11. Changes to Privacy Policy</h2>
+        <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated "Last Updated" date. Continued use of the extension constitutes acceptance of the updated policy.</p>
 
-                    <h4>Data Types Handled</h4>
-                    <ul>
-                        <li>Browsing history</li>
-                        <li>Cookies and site data</li>
-                        <li>Cache</li>
-                        <li>Downloads history</li>
-                        <li>Form data</li>
-                        <li>IndexedDB/Web SQL data</li>
-                        <li>Service workers</li>
-                    </ul>
+        <h2>12. Contact & Support</h2>
+        <p>If you have questions about this privacy policy or our practices, please contact us through the Chrome Web Store extension page.</p>
 
-                    <p><strong>Scope:</strong> Limited to local deletion only; no external data transmission</p>
-                </div>
-
-                <div class="permission-card">
-                    <h3>b) <code>commands</code> Permission <span class="badge">CONVENIENCE</span></h3>
-                    
-                    <h4>Purpose</h4>
-                    <p>Register and handle keyboard shortcuts</p>
-
-                    <h4>Justification</h4>
-                    <ul>
-                        <li><strong>User Convenience:</strong> Keyboard shortcuts allow users to quickly delete data without opening the popup.</li>
-                        <li><strong>Accessibility:</strong> Provides alternative input method for users who prefer keyboard commands.</li>
-                        <li><strong>System-Level Only:</strong> This permission only registers shortcuts at the system level; it does not read keyboard input for any other purpose.</li>
-                        <li><strong>Transparency:</strong> Shortcuts are declared in the manifest and visible to the user.</li>
-                    </ul>
-
-                    <h4>Shortcuts Supported</h4>
-                    <ul>
-                        <li>Windows/Linux: <code>Ctrl+Shift+D</code></li>
-                        <li>Mac: <code>Cmd+Shift+D</code></li>
-                    </ul>
-
-                    <p><strong>Scope:</strong> System-level keyboard events only; no content access</p>
-                </div>
-
-                <div class="permission-card">
-                    <h3>c) <code>tabs</code> Permission <span class="badge warning">OPTIONAL</span></h3>
-                    
-                    <h4>Purpose</h4>
-                    <p>Close open browser tabs when user requests</p>
-
-                    <h4>Usage</h4>
-                    <p>Closes all open tabs if "Open windows and tabs" option is selected</p>
-
-                    <h4>Justification</h4>
-                    <ul>
-                        <li><strong>User-Controlled Feature:</strong> Users can optionally select "Open windows and tabs" for deletion.</li>
-                        <li><strong>No Mandatory Closing:</strong> Tabs are only closed when the user explicitly enables and triggers this option.</li>
-                        <li><strong>Privacy Benefit:</strong> Allows users to close browsing sessions that could reveal their activity.</li>
-                        <li><strong>Limited Scope:</strong> Only closes tabs; does not read tab content or history.</li>
-                        <li><strong>User Awareness:</strong> Clear UI checkbox informs users about this capability before deletion.</li>
-                    </ul>
-
-                    <p><strong>Scope:</strong> Only affects tabs when user explicitly triggers deletion; no background monitoring</p>
-                </div>
-
-                <div class="permission-card">
-                    <h3>d) <code>storage</code> Permission <span class="badge">PREFERENCES</span></h3>
-                    
-                    <h4>Purpose</h4>
-                    <p>Store user preferences for deletion settings</p>
-
-                    <h4>Data Stored</h4>
-                    <ul>
-                        <li>Selected data types to delete (binary flags)</li>
-                        <li>Preferred time range selection</li>
-                        <li>No personal or browsing information</li>
-                    </ul>
-
-                    <h4>Justification</h4>
-                    <ul>
-                        <li><strong>Preference Preservation:</strong> Users expect their settings to be remembered between sessions.</li>
-                        <li><strong>Local Storage Only:</strong> Uses <code>chrome.storage.local</code> (device-only), not cloud sync.</li>
-                        <li><strong>Minimal Data:</strong> Only stores user preferences, not personal information.</li>
-                        <li><strong>User Control:</strong> Stored data can be cleared anytime through Chrome settings.</li>
-                        <li><strong>No External Transmission:</strong> All data remains on the user's device.</li>
-                    </ul>
-
-                    <p><strong>Scope:</strong> Local device storage only; no cloud synchronization or external access</p>
-                </div>
-            </section>
-
-            <section id="compliance">
-                <h2>5. Additional Policy Compliance</h2>
-
-                <h3>User Control</h3>
-                <ul class="checklist">
-                    <li>Users select which data to delete</li>
-                    <li>Users choose time range</li>
-                    <li>Users can disable individual deletion options</li>
-                    <li>Visual confirmation of actions</li>
-                </ul>
-
-                <h3>Privacy & Security</h3>
-                <ul class="checklist">
-                    <li>No data collection or analytics</li>
-                    <li>No third-party integrations</li>
-                    <li>All operations are offline</li>
-                    <li>No background data transmission</li>
-                </ul>
-
-                <h3>Transparency</h3>
-                <ul class="checklist">
-                    <li>Clear UI showing deletion options</li>
-                    <li>Status messages confirming actions</li>
-                    <li>Honest description of functionality</li>
-                </ul>
-            </section>
-
-            <section id="capabilities">
-                <h2>6. Data Deletion Capabilities</h2>
-
-                <p>The extension can delete:</p>
-                <ul>
-                    <li>Browsing history</li>
-                    <li>Cookies and site data</li>
-                    <li>Cached images and files</li>
-                    <li>Downloaded files history</li>
-                    <li>Form data</li>
-                    <li>App cache</li>
-                    <li>IndexedDB data</li>
-                    <li>Local storage</li>
-                    <li>Web SQL data</li>
-                    <li>Service workers</li>
-                    <li>Open windows and tabs</li>
-                </ul>
-            </section>
-
-            <section id="manifest">
-                <h2>7. Manifest Configuration</h2>
-
-                <pre><code>{
-  "manifest_version": 3,
-  "name": "Click and Clear",
-  "version": "1.0.0",
-  "description": "Delete browsing data with one click",
-  "permissions": [
-    "browsingData",
-    "commands",
-    "storage",
-    "tabs"
-  ],
-  "action": {
-    "default_title": "Click and Clear",
-    "default_popup": "popup.html"
-  },
-  "commands": {
-    "delete-all-data": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+D",
-        "mac": "Command+Shift+D"
-      },
-      "description": "Delete all browsing data"
-    }
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "icons": {
-    "16": "images/icon-16.ico",
-    "48": "images/icon-48.ico",
-    "128": "images/icon-128.ico"
-  }
-}</code></pre>
-            </section>
-
-            <section id="checklist">
-                <h2>8. Compliance Checklist</h2>
-
-                <ul class="checklist">
-                    <li>Single, well-defined purpose</li>
-                    <li>Only necessary permissions requested</li>
-                    <li>No deceptive practices</li>
-                    <li>Local data processing only</li>
-                    <li>User preferences stored locally</li>
-                    <li>Clear functionality description</li>
-                    <li>Keyboard shortcut support documented</li>
-                    <li>No unauthorized data collection</li>
-                    <li>Compliant with Chrome Web Store policies</li>
-                </ul>
-            </section>
-        </main>
+        <div class="highlight">
+            <strong>Summary:</strong> We collect minimal data, store it only locally on your device, never share it with anyone, and you have complete control over all settings and data deletion.
+        </div>
 
         <footer>
-            <p>&copy; 2026 Click and Clear Extension</p>
-            <p>Chrome Web Store Policy Documentation</p>
+            <p>&copy; 2026 Click and Clear. All rights reserved.</p>
+            <p>This privacy policy is compliant with GDPR, CCPA, and Chrome Web Store policies.</p>
         </footer>
     </div>
 </body>
 </html>
-EOF
-
-# Create README.md
-cat > README.md << 'EOF'
-# Click and Clear - Policy Documentation
-
-This repository hosts the official Chrome Web Store policy documentation for the **Click and Clear** browser extension.
-
-## Live Documentation
-
-Visit the live documentation at: [https://srwaditya.github.io/clickandclear/](https://srwaditya.github.io/clickandclear/)
-
-## About Click and Clear
-
-Click and Clear is a Chrome extension designed for efficiently deleting browsing data with a single click or keyboard shortcut.
-
-### Features
-- One-click browsing data deletion
-- Keyboard shortcuts (Ctrl+Shift+D / Cmd+Shift+D)
-- Granular control over data types
-- Multiple time range options
-- Complete privacy (no data collection)
-
-## Documentation Contents
-
-This documentation includes:
-- Extension overview and purpose
-- Permission justifications
-- Privacy and security compliance
-- Chrome Web Store policy alignment
-- Technical specifications
-
-## GitHub Pages
-
-This site is automatically deployed via GitHub Pages from the `main` branch.
-
-## License
-
-Documentation © 2026 Click and Clear Extension
-EOF
-
-# Create GitHub Actions workflow directory
-mkdir -p .github/workflows
-
-# Create GitHub Pages deployment workflow
-cat > .github/workflows/pages.yml << 'EOF'
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-EOF
-
-# Add all files to git
-git add .
-
-# Commit the changes
-git commit -m "Initial commit: Add Click and Clear policy documentation"
-
-# Rename branch to main
-git branch -M main
-
-# Add remote origin
-git remote add origin https://github.com/srwaditya/clickandclear.git
-
-# Push to GitHub
-git push -u origin main
